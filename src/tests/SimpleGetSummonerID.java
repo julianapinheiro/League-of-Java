@@ -1,5 +1,7 @@
 package tests;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import net.rithms.riot.api.RiotApi;
@@ -20,7 +22,6 @@ public class SimpleGetSummonerID {
 	
 	public SimpleGetSummonerID(RiotApi api) throws RiotApiException{
 		this.api = api;
-		
         Map<String, Summoner> summoners;
 		summoners = api.getSummonersByName(Region.BR, "theaan");
 		Summoner summoner = summoners.get("theaan");
@@ -29,11 +30,28 @@ public class SimpleGetSummonerID {
 	     
 	}
 	
+	public SimpleGetSummonerID(){
+		
+	}
+	
+	/*
+	 * below method works :D
+	 */
+	
 	public void GetFreeWeekChampions() throws RiotApiException{
 		ChampionList lista = api.getChampions(Region.BR, true);
         for (Champion champ : lista.getChampions()) {
         	long id = champ.getId();
         	System.out.println(api.getDataChampion((int) id).getName());
         }
+	}
+	
+	/*
+	 * Model method so I don't need to use make requests while testing the GUI
+	 */
+	
+	public List<String> GetFWChampions() {
+		List<String> lista = Arrays.asList("Braum", "Cassiopeia", "Gangplank", "Janna", /*"Jarvan IV",*/ "Jhin", "Lucian", /*"Master Yi",*/ "Tryndamere" /*, "Vel'Koz"*/);
+		return lista;
 	}
 }

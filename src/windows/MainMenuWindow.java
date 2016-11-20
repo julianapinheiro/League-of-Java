@@ -2,6 +2,7 @@ package windows;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -10,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import net.rithms.riot.api.RiotApi;
+import net.rithms.riot.api.RiotApiException;
 
 public class MainMenuWindow extends JFrame {
 	
@@ -30,7 +32,11 @@ public class MainMenuWindow extends JFrame {
 		
 		JButton freeWeekButton = new JButton("Free Week Champions");
 		freeWeekButton.addActionListener((e) -> {
-			new FreeWeekWindow().setVisible(true);
+			try {
+				new FreeWeekWindow(api).setVisible(true);
+			} catch (IOException | RiotApiException e1) {
+				e1.printStackTrace();
+			}
 		});
 		panel.add(freeWeekButton);
 		

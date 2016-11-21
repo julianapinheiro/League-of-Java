@@ -18,7 +18,6 @@ public class MainMenuWindow extends JFrame {
 	private static final long serialVersionUID = -6686772812748502050L;
 	
 	public MainMenuWindow(RiotApi api) {
-		
 		super("League of Java");
 		
 		setSize(600, 400);
@@ -26,7 +25,7 @@ public class MainMenuWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(7, 1));
+		panel.setLayout(new GridLayout(5, 1));
 		//panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));	
 		
@@ -40,23 +39,15 @@ public class MainMenuWindow extends JFrame {
 		});
 		panel.add(freeWeekButton);
 		
-		panel.add(Box.createRigidArea(new Dimension(5,0)));
+		panel.add(Box.createRigidArea(new Dimension(0,0)));
 		
-		JButton summonerInfoButton = new JButton("Search summoner");
-		summonerInfoButton.addActionListener((e) -> {
-			new SummonerInfoWindow().setVisible(true);
+		JButton searchSummonerButton = new JButton("Search summoner");
+		searchSummonerButton.addActionListener((e) -> {
+			new SearchSummonerWindow(api).setVisible(true);
 		});
-		panel.add(summonerInfoButton);
+		panel.add(searchSummonerButton);
 		
-		panel.add(Box.createRigidArea(new Dimension(5,0)));
-		
-		JButton matchStatusButton = new JButton("Search match by summoner name");
-		matchStatusButton.addActionListener((e) -> {
-			new MatchStatusWindow().setVisible(true);
-		});
-		panel.add(matchStatusButton);
-		
-		panel.add(Box.createRigidArea(new Dimension(5,0)));
+		panel.add(Box.createRigidArea(new Dimension(0,0)));
 		
 		JButton urfTunesButton = new JButton("Urf Tunes");
 		urfTunesButton.addActionListener((e) -> {

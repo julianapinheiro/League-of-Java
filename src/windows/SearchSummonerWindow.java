@@ -2,6 +2,7 @@ package windows;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -12,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import net.rithms.riot.api.RiotApi;
+import net.rithms.riot.api.RiotApiException;
+import net.rithms.riot.constant.Region;
 
 public class SearchSummonerWindow extends JFrame {
 
@@ -34,14 +37,19 @@ public class SearchSummonerWindow extends JFrame {
 		JTextField search = new JTextField();
 		panel.add(search);
 		
-		//String input = search.getText();
+		String input = search.getText();
 			
 		panel.add(Box.createRigidArea(new Dimension(0,0)));
 		
 		JButton summonerInfoButton = new JButton("Summoner Info");
 		summonerInfoButton.addActionListener((e) -> {
 			setVisible(false);
-			new SummonerInfoWindow(api).setVisible(true);
+			try {
+				new SummonerInfoWindow(api, api.getSummonerByName(Region.BR, "supperino")).setVisible(true);
+			} catch (RiotApiException | IOException e1) {
+				System.out.println("Data not found ");
+				//e1.printStackTrace();
+			}
 		});
 		panel.add(summonerInfoButton);
 		

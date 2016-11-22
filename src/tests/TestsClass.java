@@ -23,7 +23,7 @@ public class TestsClass {
 	
 	private RiotApi api;
 	
-	public TestsClass(RiotApi api) throws RiotApiException{
+	public TestsClass(RiotApi api) {
 		this.api = api;
 	}
 
@@ -44,7 +44,7 @@ public class TestsClass {
 		return lista;
 	}
 	
-	public void testImage(RiotApi api){
+	public void testImage(){
 		try {
 			net.rithms.riot.dto.Static.Champion campeao = api.getDataChampion(Region.BR, 266, "pt_BR", "6.22.1", ChampData.IMAGE);
 			System.out.println(campeao.getName());
@@ -56,14 +56,14 @@ public class TestsClass {
 	/*
 	 * CurrentGame isn't working, problem: request limit
 	 */
-	public void testCurrentGame(RiotApi api) {
+	public void testCurrentGame() {
 		try {
 			CurrentGameInfo game = api.getCurrentGameInfo(PlatformId.BR, 1926057);
 			System.out.println("in game");
 			for (Participant jogador : game.getParticipants()) {
 				long id = jogador.getSummonerId();
 				System.out.println(api.getSummonerName(Region.BR, id));
-				testGetTier(api, id);
+				testGetTier(id);
 				Thread.sleep(1000);
 			}
 		} catch (RiotApiException e) {
@@ -77,9 +77,9 @@ public class TestsClass {
 	/*
 	 * GetTier is working, images must be stored locally
 	 */
-	public void testGetTier(RiotApi api, long id) {
+	public void testGetTier(long id) {
 		try {
-			League liga = api.getLeagueBySummoner(Region.BR, id).get(0);
+			League liga = api.getLeagueBySummoner(Region.BR, id).get(1);
 			LeagueEntry entrada = liga.getEntries().get(0);
 			System.out.println("queue: " + liga.getQueue() + " tier: " + liga.getTier() + " " + entrada.getDivision());
 		} catch (RiotApiException e) {

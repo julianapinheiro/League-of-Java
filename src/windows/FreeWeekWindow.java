@@ -23,18 +23,19 @@ public class FreeWeekWindow extends JFrame {
 	public FreeWeekWindow(RiotApi api) throws RiotApiException, IOException {
 		super("Free Week Champion Rotation");
 			
-		setSize(800, 600);
+		setSize(700, 450);
 		setLocationRelativeTo(null);
-		setLayout(new GridLayout(2, 4));
+		setLayout(new GridLayout(2, 5));
 		
 		JLabel championLabel;
 		
 		List<net.rithms.riot.dto.Champion.Champion> lista = api.getChampions(Region.BR, true).getChampions();
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 10; i++) {
 			Champion campeao = api.getDataChampion(Region.BR, (int) lista.get(i).getId(), "pt_BR", "6.22.1", ChampData.ALL);
-	        championLabel = new JLabel(campeao.getName());
 	        URL url = new URL(new String ("http://ddragon.leagueoflegends.com/cdn/6.22.1/img/champion/" + campeao.getImage().getFull()));
-	        championLabel.setIcon(new ImageIcon (ImageIO.read(url)));
+	        championLabel = new JLabel(campeao.getName(), new ImageIcon (ImageIO.read(url)), JLabel.CENTER);
+	        championLabel.setVerticalTextPosition(JLabel.BOTTOM);
+	        championLabel.setHorizontalTextPosition(JLabel.CENTER);
 			add(championLabel);
 		}
 

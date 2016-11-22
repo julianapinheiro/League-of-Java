@@ -11,7 +11,7 @@ public class Main {
 		RiotApi api = new RiotApi("YOUR API KEY");
 		
 		new MainMenuWindow(api).setVisible(true);
-				
+		
 	}
 	
 }
